@@ -1,16 +1,30 @@
 const fs = require('fs');
 const chalk = require('chalk');
 
-const getNotes = () => {
-	return 'Your notes...';
+const getNotes = () => 'Your notes...';
+
+const saveNotes = (notes) => {
+	const dataJSON = JSON.stringify(notes);
+	fs.writeFileSync('notes.json', dataJSON);
 };
 
-const addNote = function (title, body) {
+const loadNotes = () => {
+	try {
+		const dataBuffer = fs.readFileSync('notes.json');
+		const dataJSON = dataBuffer.toString();
+		return JSON.parse(dataJSON);
+	} catch (err) {
+		return [];
+	}
+};
+
+const addNote = (title, body) => {
 	const notes = loadNotes();
 
-	const duplicateNotes = notes.filter((note) => note.title === title);
+	// const duplicateNotes = notes.filter((note) => note.title === title);
+	const duplicateNote = notes.find((note) => note.title === title);
 
-	if (duplicateNotes.length === 0) {
+	if (!duplicateNote) {
 		notes.push({
 			title: title,
 			body: body,
@@ -22,26 +36,11 @@ const addNote = function (title, body) {
 	}
 };
 
-
-const saveNotes = function (notes) {
-	const dataJSON = JSON.stringify(notes);
-	fs.writeFileSync('notes.json', dataJSON);
-};
-
-const loadNotes = function () {
-	try {
-		const dataBuffer = fs.readFileSync('notes.json');
-		const dataJSON = dataBuffer.toString();
-		return JSON.parse(dataJSON);
-	} catch (err) {
-		return [];
-	}
-};
-
-const removeNote = function (title) {
+const removeNote = (title) => {
 	const notes = loadNotes();
 
 	const indexNumber = notes.findIndex((note) => note.title === title);
+
 	console.log(indexNumber);
 	if (indexNumber === -1) {
 		console.log(chalk.red.bgWhite('Not notes found by the title ' + title));
@@ -52,8 +51,30 @@ const removeNote = function (title) {
 	}
 };
 
+const listNotes = () => {
+	const notes = loadNotes();
+	if (notes.length > 0) {
+		console.log(chalk.cyan('Here is your notes: '));
+		notes.forEach((note, i) => console.log(i + '. ' + note.title));
+	} else {
+		console.log('No notes found.');
+	}
+};
+
+const readNote = (title) => {
+	const notes = loadNotes();
+	const match = notes.find((note) => note.title === title);
+	if (!match) {
+		console.log(chalk.red.bgWhite('Cannot find note by title: ' + title));
+	} else {
+		console.log(chalk.white.bgBlue(match.title));
+		console.log(match.body);
+	}
+};
+
 module.exports = {
-	getNotes: getNotes,
 	addNote: addNote,
 	removeNote: removeNote,
+	listNotes: listNotes,
+	readNote: readNote,
 };
