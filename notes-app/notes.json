@@ -1,1 +1,5 @@
-[{"title":"Necessity","body":"Clothes, Food"},{"title":"Harry","body":"Books to buy"}]
+[
+	{ "title": "Necessity", "body": "Clothes, Food" },
+	{ "title": "Idaho", "body": "Clothes to buy" },
+	{ "title": "Harry", "body": "Books to buy" }
+]

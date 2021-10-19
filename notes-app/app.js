@@ -44,6 +44,7 @@ yargs.command({
 	},
 });
 
+
 // Create list command
 yargs.command({
     command: 'list',
