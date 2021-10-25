@@ -8,6 +8,7 @@ data.age = 29;
 const newDataJSON = JSON.stringify(data);
 fs.writeFileSync('1-json.json', newDataJSON);
 
+
 //**********************************************************************************************************//
 // const dataBuffer = fs.readFileSync('1-json.json');
 // const dataJSON = dataBuffer.toString();

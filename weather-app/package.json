@@ -1,8 +1,8 @@
 {
-  "name": "practice-1",
+  "name": "weather-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,9 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^4.1.2",
-    "postman-request": "^2.88.1-postman.30",
-    "validator": "^13.6.0",
-    "yargs": "^17.2.1"
+    "postman-request": "^2.88.1-postman.30"
   }
 }
